@@ -16,7 +16,12 @@ lazy val commonSettings = commonSmlBuildSettings ++ Seq(
 
 lazy val root = (project in file("."))
   .settings(commonSettings: _*)
-  .settings(publish / skip := true, name := "sttp-openai", scalaVersion := scala2.head)
+  .settings(
+    publish / skip := true,
+    gitRelease := {},
+    name := "sttp-openai",
+    scalaVersion := scala2.head,
+  )
   .aggregate(allAgregates: _*)
 
 lazy val allAgregates = core.projectRefs ++
@@ -102,7 +107,8 @@ lazy val examples = (projectMatrix in file("examples"))
       "com.softwaremill.sttp.client4" %% "ox" % "4.0.0-M17",
       "ch.qos.logback" % "logback-classic" % "1.5.6"
     ),
-    publish / skip := true
+    publish / skip := true,
+    gitRelease := {},
   )
   .dependsOn(ox)
 
@@ -120,6 +126,7 @@ lazy val docs = (projectMatrix in file("generated-docs")) // important: it must 
     mdocOut := file("generated-docs/README.md"),
     mdocExtraArguments := Seq("--clean-target"),
     publishArtifact := false,
+    gitRelease := {},
     name := "docs",
     evictionErrorLevel := Level.Info
   )
