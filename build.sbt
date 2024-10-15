@@ -8,7 +8,7 @@ def dependenciesFor(version: String)(deps: (Option[(Long, Long)] => ModuleID)*):
   deps.map(_.apply(CrossVersion.partialVersion(version)))
 
 lazy val commonSettings = commonSmlBuildSettings ++ Seq(
-  version := "0.2.3-BL1",
+  version := "0.2.4-BL1",
   organization := "com.softwaremill.sttp.openai",
   gitPublishDir := file("/src/maven-repo"),
   licenses += License.Apache2,
