@@ -1,5 +1,4 @@
 import com.softwaremill.SbtSoftwareMillCommon.commonSmlBuildSettings
-import com.softwaremill.Publish.ossPublishSettings
 import Dependencies._
 
 val scala2 = List("2.13.15")
@@ -8,8 +7,11 @@ val scala3 = List("3.3.4")
 def dependenciesFor(version: String)(deps: (Option[(Long, Long)] => ModuleID)*): Seq[ModuleID] =
   deps.map(_.apply(CrossVersion.partialVersion(version)))
 
-lazy val commonSettings = commonSmlBuildSettings ++ ossPublishSettings ++ Seq(
-  organization := "com.softwaremill.sttp.openai"
+lazy val commonSettings = commonSmlBuildSettings ++ Seq(
+  version := "0.2.3-BL1",
+  organization := "com.softwaremill.sttp.openai",
+  gitPublishDir := file("/src/maven-repo"),
+  licenses += License.Apache2,
 )
 
 lazy val root = (project in file("."))
